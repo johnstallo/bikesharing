@@ -9,14 +9,40 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
-    
     <link rel="stylesheet" href="app.css">
 </head>
 
 <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded bikesharing-menu">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="color:white;">BikeSharing</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"  style="color:white;">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color:white;">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:white;">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+
     <div ng-controller="MainController">
-        <h2 style="text-align:center">Bike Sharing</h2>
-        <map center="Microsoft Building 18, Redmond, WA 98062" style="width:100%; height:700px" zoom="17" />
+        <map center="Microsoft Building 18, Redmond, WA 98062" style="width:100%; height:650px" zoom="17" />
     </div>
 
 

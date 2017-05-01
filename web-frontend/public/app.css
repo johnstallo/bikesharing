@@ -1,9 +1,16 @@
-body {
-    margin-left: 10px;
-    margin-right: 10px;
+html, body {
+    height: 100%;
 }
 
 .message {
     font-family: Courier New, Courier, monospace;
     font-weight: bold;
+}
+
+.bikesharing-menu {
+    background-color: #2980B9;
+}
+
+.bikesharing-menu>a {
+    color:white;
 }
