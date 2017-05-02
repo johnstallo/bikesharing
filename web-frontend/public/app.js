@@ -1,46 +1,51 @@
 var app = angular.module('myApp', ['ngRoute', 'ngMap']);
 
-app.controller('MainController', function ($scope, $http, NgMap) {
-
-    $scope.messages = [];
-    $scope.sayHelloToServer = function () {
-        $http.get("/api?_=" + Date.now()).then(function (response) {
-            $scope.messages.push(response.data);
-
-            // Make request to /metrics            
-            // $http.get("/metrics?_=" + Date.now()).then(function(response) {
-            //     $scope.metrics = response.data;
-            // });
-        });
+app.controller('MainController', function ($scope, $http, $timeout) {
+    $scope.map = null;
+    $scope.markers = [];
+    $scope.markerId = 1;
+    $scope.position = { lat: 39.8282, lng: -98.5795 };
+    var ROADMAP = 'roadmap';
+    $scope.initialMapOptions = {
+        zoom: 4,
+        center: $scope.position,
+        mapTypeId: ROADMAP
+    };
+    $scope.mapOptions = {
+        zoom: 17,
+        center: $scope.position,
+        mapTypeId: ROADMAP
     };
 
-    $scope.sayHelloToServer();
+    $timeout(function () {
+        $scope.map = new google.maps.Map(document.getElementById("map_canvas"), $scope.initialMapOptions);
 
-    var styles = [];
-    var colors = ["black", "green", "red", "blue", "orange", "purple", "gray"];
-    var colorIndex = 0;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
 
-    $scope.getStyle = function (message) {
-        if (!styles[message]) {
-            styles[message] = { 'color': colors[colorIndex] };
-            colorIndex = colorIndex < colors.length - 1 ? colorIndex + 1 : 0;
+                var marker = new google.maps.Marker({
+                    position: $scope.position,
+                    map: $scope.map
+                });
+
+                $scope.map.setCenter($scope.position);
+                smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
+            });
+
         }
-        return styles[message];
-    };
+    }, 100);
 
-    console.log("hello ");
-    // NgMap.getMap().then(function (map) {
-    //     console.log("world");
-    //     console.log(map.getCenter());
-    //     console.log('markers', map.markers);
-    //     console.log('shapes', map.shapes);
-    // });
-
-    NgMap.getMap().then(function (map) {
-        console.log('world');
-        console.log(map.getCenter());
-        console.log('markers', map.markers);
-        console.log('shapes', map.shapes);
-    });
-
+    function smoothZoom(map, max, cnt) {
+        if (cnt >= max) {
+            return;
+        }
+        else {
+            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                google.maps.event.removeListener(z);
+                smoothZoom(map, max, cnt + 1);
+            });
+            setTimeout(function () { map.setZoom(cnt) }, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+        }
+    }
 });
