@@ -26,6 +26,19 @@ app.controller('MainController', function ($scope, $http, $timeout) {
 
                 var marker = new google.maps.Marker({
                     position: $scope.position,
+                    // icon: '/images/male-icon.png',
+                    map: $scope.map
+                });
+
+                var availableBike1 = new google.maps.Marker({
+                    position: {lat: $scope.position.lat+0.001, lng: $scope.position.lng+0.001},
+                    icon: '/images/bike-icon.png',
+                    map: $scope.map
+                });
+
+                var availableBike2 = new google.maps.Marker({
+                    position: {lat: $scope.position.lat-0.001, lng: $scope.position.lng-0.003},
+                    icon: '/images/bike-icon.png',
                     map: $scope.map
                 });
 
