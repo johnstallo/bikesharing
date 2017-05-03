@@ -43,7 +43,8 @@
 
 
     <div ng-controller="MainController" style="height:100%">
-        <div id="map_canvas" style="width:100%; height:93%"></div>
+        <div id="map_canvas" ng-style="mapStyle" ng-click="closePanel()"></div>
+        <div ng-style="panelStyle"></div>
     </div>
 
 
