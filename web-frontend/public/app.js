@@ -25,17 +25,34 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         ];
 
         for (var i = 0; i < BIKE_LOCATIONS.length; i++) {
-            var bike = new google.maps.Marker({
+            var bikeData = {
+                id: i,
+                name: "bike" + i,
+            };
+            var marker = new google.maps.Marker({
                 position: { lat: currentPosition.lat + BIKE_LOCATIONS[i].latDiff, lng: currentPosition.lng + BIKE_LOCATIONS[i].lngDiff },
                 icon: '/images/bike-icon.png',
+                animation: google.maps.Animation.DROP,
                 map: map
             });
-            bike.addListener('click', function () {
-                $scope.openPanel();
-            });
-            $scope.availableBikes.push(bike);
+
+            attachBikeData(marker, bikeData);
+
+            // google.maps.event.addListener(bike.marker, 'click', function() {
+            //     $scope.openPanel();
+            // });
+            // bike.marker.addListener('click', function (e) {
+            //     $scope.openPanel();
+            // });
+            $scope.availableBikes.push(bikeData);
         }
     };
+
+    function attachBikeData(marker, bikeData) {
+        marker.addListener('click', function () {
+                $scope.openPanel(bikeData);
+            });
+    }
 
     $timeout(function () {
         $scope.map = new google.maps.Map(document.getElementById("map_canvas"),
@@ -51,36 +68,20 @@ app.controller('MainController', function ($scope, $http, $timeout) {
                     map: $scope.map
                 });
 
-                getAvailableBikes($scope.map, $scope.position);
-                // var availableBike1 = new google.maps.Marker({
-                //     position: { lat: $scope.position.lat + 0.001, lng: $scope.position.lng + 0.001 },
-                //     icon: '/images/bike-icon.png',
-                //     map: $scope.map
-                // });
-
-                // availableBike1.addListener('click', function () {
-                //     $scope.openPanel();
-                // });
-
-                // var availableBike2 = new google.maps.Marker({
-                //     position: { lat: $scope.position.lat - 0.001, lng: $scope.position.lng - 0.003 },
-                //     icon: '/images/bike-icon.png',
-                //     map: $scope.map
-                // });
-
-                // availableBike2.addListener('click', function () {
-                //     $scope.openPanel();
-                // });
-
                 $scope.map.setCenter($scope.position);
                 smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
+                $timeout(function() {
+                    getAvailableBikes($scope.map, $scope.position);
+                }, 2000);
+                
             });
 
         }
     }, 100);
 
-    $scope.openPanel = function () {
+    $scope.openPanel = function (bikeData) {
         console.log("open panel");
+        $scope.bikeData = bikeData;
         $scope.showPanel = true;
         $scope.mapStyle = { width: '100%', height: '63%' };
         $scope.$apply();
