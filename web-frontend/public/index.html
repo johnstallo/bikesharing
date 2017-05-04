@@ -44,8 +44,9 @@
 
     <div ng-controller="MainController" style="height:100%">
         <div id="map_canvas" ng-style="mapStyle" ng-click="closePanel()"></div>
-        <div ng-style="panelStyle">
-            <pre style="color:white; margin-left:10px; margin-top:10px;">{{bikeData | json }}</pre>
+        <div ng-style="panelStyle" class="bikes-panel">
+            <h1>Walking Distance: {{bikeData.distance.text}}</h1>
+            {{bikeData | json }}
         </div>
     </div>
 

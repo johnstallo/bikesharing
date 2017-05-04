@@ -36,27 +36,27 @@ app.controller('MainController', function ($scope, $http, $timeout) {
                 map: map
             });
 
+            bikeData.position = marker.position;
             attachBikeData(marker, bikeData);
-
-            // google.maps.event.addListener(bike.marker, 'click', function() {
-            //     $scope.openPanel();
-            // });
-            // bike.marker.addListener('click', function (e) {
-            //     $scope.openPanel();
-            // });
             $scope.availableBikes.push(bikeData);
         }
     };
 
     function attachBikeData(marker, bikeData) {
         marker.addListener('click', function () {
-                $scope.openPanel(bikeData);
-            });
+            $scope.openPanel(bikeData);
+            calcRoute($scope.position, bikeData.position);
+        });
     }
 
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay;
+
     $timeout(function () {
-        $scope.map = new google.maps.Map(document.getElementById("map_canvas"),
-            $scope.initialMapOptions);
+        directionsDisplay = new google.maps.DirectionsRenderer();
+
+        $scope.map = new google.maps.Map(document.getElementById("map_canvas"), $scope.initialMapOptions);
+        directionsDisplay.setMap($scope.map);
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -70,14 +70,30 @@ app.controller('MainController', function ($scope, $http, $timeout) {
 
                 $scope.map.setCenter($scope.position);
                 smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
-                $timeout(function() {
+                $timeout(function () {
                     getAvailableBikes($scope.map, $scope.position);
                 }, 2000);
-                
+
             });
 
         }
     }, 100);
+
+    function calcRoute(start, end) {
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: 'WALKING'
+        };
+        directionsService.route(request, function (result, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(result);
+                $scope.bikeData.distance = result.routes[0].legs[0].distance;
+                $scope.$apply(); //hack!
+                console.log(result);
+            }
+        });
+    }
 
     $scope.openPanel = function (bikeData) {
         console.log("open panel");
@@ -98,7 +114,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
     function initializeLayout() {
         $scope.showPanel = false;
         $scope.mapStyle = { width: '100%', height: '93%' };
-        $scope.panelStyle = { width: '100%', height: '30%', 'background-color': 'green' };
+        $scope.panelStyle = {};
     };
     initializeLayout();
 
