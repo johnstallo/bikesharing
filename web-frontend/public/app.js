@@ -113,6 +113,10 @@ app.controller('MainController', function ($scope, $http, $timeout) {
             console.log("close panel");
             $scope.showPanel = false;
             $scope.mapStyle = MAP_HEIGHT_FULL;
+            $scope.map.setCenter($scope.position);
+            console.log("resetting zoom, currently " + $scope.map.getZoom());
+            $scope.map.setZoom($scope.mapOptions.zoom-1); // BUG: zoom seems to require setting to zoom-1 for this to work
+            // smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
         }
     };
 
@@ -124,11 +128,17 @@ app.controller('MainController', function ($scope, $http, $timeout) {
     initializeLayout();
 
     function smoothZoom(map, max, cnt) {
-        if (cnt >= max) {
+        console.log("smoothZoom start: ", cnt, max);
+        if (cnt == max) {
             return;
         }
+        if (cnt > max) {
+            console.log("immediate zoom from " + cnt + " to " + max);
+            map.setZoom(max-1); // BUG: zooming seems to need to be max-1 
+        }
         else {
-            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+            console.log("zooming from " + cnt + " to " + max);
+            var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
                 google.maps.event.removeListener(z);
                 smoothZoom(map, max, cnt + 1);
             });
