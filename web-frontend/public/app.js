@@ -1,6 +1,10 @@
+// @ts-check
 var app = angular.module('myApp', ['ngRoute', 'ngMap']);
 
 app.controller('MainController', function ($scope, $http, $timeout) {
+
+    var MAP_HEIGHT_FULL = { width: '100%', height: '93%' };
+    var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
     $scope.map = null;
     $scope.markers = [];
     $scope.markerId = 1;
@@ -19,6 +23,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
 
     $scope.availableBikes = [];
     function getAvailableBikes(map, currentPosition) {
+        console.log("getting available bikes...");
         var BIKE_LOCATIONS = [
             { latDiff: 0.001, lngDiff: 0.001 },
             { latDiff: -0.001, lngDiff: -0.003 }
@@ -99,7 +104,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         console.log("open panel");
         $scope.bikeData = bikeData;
         $scope.showPanel = true;
-        $scope.mapStyle = { width: '100%', height: '63%' };
+        $scope.mapStyle = MAP_HEIGHT_PARTIAL;
         $scope.$apply();
     }
 
@@ -107,13 +112,13 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         if ($scope.showPanel) {
             console.log("close panel");
             $scope.showPanel = false;
-            $scope.mapStyle = { width: '100%', height: '93%' };
+            $scope.mapStyle = MAP_HEIGHT_FULL;
         }
     };
 
     function initializeLayout() {
         $scope.showPanel = false;
-        $scope.mapStyle = { width: '100%', height: '93%' };
+        $scope.mapStyle = MAP_HEIGHT_FULL;
         $scope.panelStyle = {};
     };
     initializeLayout();

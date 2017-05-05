@@ -18,7 +18,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:white;">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!--<img src="/images/biker-128.png" style="float:left;" class="bs-logo" />-->
+    
         <a class="navbar-brand" href="#" style="color:white;">BikeSharing</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,13 +40,13 @@
         </div>
     </nav>
 
-
-
     <div ng-controller="MainController" style="height:100%">
         <div id="map_canvas" ng-style="mapStyle" ng-click="closePanel()"></div>
         <div ng-style="panelStyle" class="bikes-panel">
             <h1>Walking Distance: {{bikeData.distance.text}}</h1>
-            {{bikeData | json }}
+            <button class="btn btn-success" style="background-color: green" type="submit">Reserve Bike</button>
+            <!--DEBUG-->
+            <!--{{bikeData | json }}-->
         </div>
     </div>
 
