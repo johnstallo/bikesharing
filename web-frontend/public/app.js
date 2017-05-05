@@ -113,11 +113,11 @@ app.controller('MainController', function ($scope, $http, $timeout) {
             console.log("close panel");
             $scope.showPanel = false;
             $scope.mapStyle = MAP_HEIGHT_FULL;
-            $scope.map.setCenter($scope.position);
-            console.log("resetting zoom, currently " + $scope.map.getZoom());
-            $scope.map.setZoom($scope.mapOptions.zoom-1); // BUG: zoom seems to require setting to zoom-1 for this to work
-            // smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
         }
+        $scope.map.setCenter($scope.position);
+        console.log("resetting zoom, currently " + $scope.map.getZoom());
+        $scope.map.setZoom($scope.mapOptions.zoom-1); // BUG: zoom seems to require setting to zoom-1 for this to work
+        // smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
     };
 
     function initializeLayout() {
