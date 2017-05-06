@@ -1,5 +1,5 @@
 // @ts-check
-var app = angular.module('myApp', ['ngRoute', 'ngMap']);
+var app = angular.module('myApp', []);
 
 app.controller('MainController', function ($scope, $http, $timeout) {
 
