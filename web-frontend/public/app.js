@@ -26,7 +26,8 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         console.log("getting available bikes...");
         var BIKE_LOCATIONS = [
             { latDiff: 0.001, lngDiff: 0.001 },
-            { latDiff: -0.001, lngDiff: -0.003 }
+            { latDiff: -0.001, lngDiff: -0.003 },
+            { latDiff: 0.0035, lngDiff: 0 }
         ];
 
         for (var i = 0; i < BIKE_LOCATIONS.length; i++) {
@@ -116,7 +117,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         }
         $scope.map.setCenter($scope.position);
         console.log("resetting zoom, currently " + $scope.map.getZoom());
-        $scope.map.setZoom($scope.mapOptions.zoom-1); // BUG: zoom seems to require setting to zoom-1 for this to work
+        $scope.map.setZoom($scope.mapOptions.zoom - 1); // BUG: zoom seems to require setting to zoom-1 for this to work
         // smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
     };
 
@@ -134,7 +135,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         }
         if (cnt > max) {
             console.log("immediate zoom from " + cnt + " to " + max);
-            map.setZoom(max-1); // BUG: zooming seems to need to be max-1 
+            map.setZoom(max - 1); // BUG: zooming seems to need to be max-1 
         }
         else {
             console.log("zooming from " + cnt + " to " + max);
@@ -144,5 +145,15 @@ app.controller('MainController', function ($scope, $http, $timeout) {
             });
             setTimeout(function () { map.setZoom(cnt) }, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
         }
-    }
+    };
+
+    $scope.reserveBike = function (bikeData) {
+
+    };
+
+    $scope.sayHelloToServer = function () {
+        $http.get("/api?_=" + Date.now()).then(function (response) {
+            console.log(response.data);
+        });
+    };
 });
