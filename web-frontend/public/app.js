@@ -1,20 +1,21 @@
 // @ts-check
 var app = angular.module('myApp', []);
 
-app.controller('MainController', function ($scope, $http, $timeout, $window) {
+app.controller('MainController', function ($scope, $http, $timeout, $window, $log) {
 
-    var MAP_HEIGHT_FULL = { width: '100%', height: '93%' };
-    var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
+    // var MAP_HEIGHT_FULL = { width: '100%', height: '93%' };
+    // var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
     $scope.map = null;
     $scope.markers = [];
-    $scope.markerId = 1;
     $scope.position = { lat: 39.8282, lng: -98.5795 };
     var ROADMAP = 'roadmap';
+    
     $scope.initialMapOptions = {
         zoom: 4,
         center: $scope.position,
         mapTypeId: ROADMAP
     };
+    
     $scope.mapOptions = {
         zoom: 17,
         center: $scope.position,
@@ -49,8 +50,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window) {
     };
 
     function attachBikeData(marker, bikeData) {
-        marker.addListener('click', function (event) {
-            console.log("event: ", event);
+        marker.addListener('click', function () {
             $scope.openPanel(bikeData);
             calcRoute($scope.position, bikeData.position);
         });
@@ -71,7 +71,6 @@ app.controller('MainController', function ($scope, $http, $timeout, $window) {
 
                 var marker = new google.maps.Marker({
                     position: $scope.position,
-                    // icon: '/images/male-icon.png',
                     map: $scope.map
                 });
 
@@ -107,25 +106,24 @@ app.controller('MainController', function ($scope, $http, $timeout, $window) {
         console.log("open panel");
         $scope.bikeData = bikeData;
         $scope.showPanel = true;
-        $scope.mapStyle = getMapHeight();
+        $scope.mapStyle = getMapStyle();
         $scope.$apply();
     };
 
-    
+
     function calculateMapHeight(panelIsVisible) {
-        var NAVBAR_HEIGHT = 38+10;
-        var MAX_PANEL_HEIGHT = 120;
+        var NAVBAR_HEIGHT = 38 + 10;
         var maxMapHeightPixels = $window.innerHeight - NAVBAR_HEIGHT;
         if (panelIsVisible) {
-            var panelHeight = maxMapHeightPixels * 0.2;
+            var MAP_PANEL_RATIO = 0.8;
+            var MAX_PANEL_HEIGHT = 120;
+            var panelHeight = maxMapHeightPixels * (1-MAP_PANEL_RATIO);
             if (panelHeight > MAX_PANEL_HEIGHT) {
                 maxMapHeightPixels = maxMapHeightPixels - MAX_PANEL_HEIGHT;
             }
             else {
-                maxMapHeightPixels = maxMapHeightPixels * 0.8;
+                maxMapHeightPixels = maxMapHeightPixels * MAP_PANEL_RATIO;
             }
-            console.log("panelHeight: ", panelHeight);
-            // maxMapHeightPixels = maxMapHeightPixels*0.75;
         }
 
         var mapHeight = (maxMapHeightPixels / $window.innerHeight) * 100 + "%";
@@ -135,7 +133,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window) {
     var MAP_STYLE_PARTIAL = calculateMapHeight(true);
     var MAP_STYLE_FULLSCREEN = calculateMapHeight(false);
 
-    function getMapHeight() {
+    function getMapStyle() {
         if ($scope.showPanel) {
             return MAP_STYLE_PARTIAL;
         }
@@ -143,20 +141,17 @@ app.controller('MainController', function ($scope, $http, $timeout, $window) {
     }
 
     $scope.closePanel = function () {
-        // if ($scope.showPanel) {
-            console.log("close panel");
-            $scope.showPanel = false;
-            $scope.mapStyle = getMapHeight();
-        // }
+        console.log("close panel");
+        $scope.showPanel = false;
+        $scope.mapStyle = getMapStyle();
         $scope.map.setCenter($scope.position);
-        console.log("resetting zoom, currently " + $scope.map.getZoom());
         $scope.map.setZoom($scope.mapOptions.zoom - 1); // BUG: zoom seems to require setting to zoom-1 for this to work
         // smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
     };
 
     function initializeLayout() {
         $scope.showPanel = false;
-        $scope.mapStyle = getMapHeight();
+        $scope.mapStyle = getMapStyle();
         $scope.panelStyle = {};
     };
     initializeLayout();
