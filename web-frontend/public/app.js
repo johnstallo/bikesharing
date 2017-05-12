@@ -1,7 +1,7 @@
 // @ts-check
 var app = angular.module('myApp', []);
 
-app.controller('MainController', function ($scope, $http, $timeout) {
+app.controller('MainController', function ($scope, $http, $timeout, $window) {
 
     var MAP_HEIGHT_FULL = { width: '100%', height: '93%' };
     var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
@@ -49,7 +49,8 @@ app.controller('MainController', function ($scope, $http, $timeout) {
     };
 
     function attachBikeData(marker, bikeData) {
-        marker.addListener('click', function () {
+        marker.addListener('click', function (event) {
+            console.log("event: ", event);
             $scope.openPanel(bikeData);
             calcRoute($scope.position, bikeData.position);
         });
@@ -75,6 +76,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
                 });
 
                 $scope.map.setCenter($scope.position);
+                // $scope.map.setZoom($scope.mapOptions.zoom-1);
                 smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
                 $timeout(function () {
                     getAvailableBikes($scope.map, $scope.position);
@@ -105,16 +107,47 @@ app.controller('MainController', function ($scope, $http, $timeout) {
         console.log("open panel");
         $scope.bikeData = bikeData;
         $scope.showPanel = true;
-        $scope.mapStyle = MAP_HEIGHT_PARTIAL;
+        $scope.mapStyle = getMapHeight();
         $scope.$apply();
+    };
+
+    
+    function calculateMapHeight(panelIsVisible) {
+        var NAVBAR_HEIGHT = 38+10;
+        var MAX_PANEL_HEIGHT = 120;
+        var maxMapHeightPixels = $window.innerHeight - NAVBAR_HEIGHT;
+        if (panelIsVisible) {
+            var panelHeight = maxMapHeightPixels * 0.2;
+            if (panelHeight > MAX_PANEL_HEIGHT) {
+                maxMapHeightPixels = maxMapHeightPixels - MAX_PANEL_HEIGHT;
+            }
+            else {
+                maxMapHeightPixels = maxMapHeightPixels * 0.8;
+            }
+            console.log("panelHeight: ", panelHeight);
+            // maxMapHeightPixels = maxMapHeightPixels*0.75;
+        }
+
+        var mapHeight = (maxMapHeightPixels / $window.innerHeight) * 100 + "%";
+        console.log("mapheight: ", mapHeight);
+        return { width: '100%', height: mapHeight };
+    }
+    var MAP_STYLE_PARTIAL = calculateMapHeight(true);
+    var MAP_STYLE_FULLSCREEN = calculateMapHeight(false);
+
+    function getMapHeight() {
+        if ($scope.showPanel) {
+            return MAP_STYLE_PARTIAL;
+        }
+        return MAP_STYLE_FULLSCREEN
     }
 
     $scope.closePanel = function () {
-        if ($scope.showPanel) {
+        // if ($scope.showPanel) {
             console.log("close panel");
             $scope.showPanel = false;
-            $scope.mapStyle = MAP_HEIGHT_FULL;
-        }
+            $scope.mapStyle = getMapHeight();
+        // }
         $scope.map.setCenter($scope.position);
         console.log("resetting zoom, currently " + $scope.map.getZoom());
         $scope.map.setZoom($scope.mapOptions.zoom - 1); // BUG: zoom seems to require setting to zoom-1 for this to work
@@ -123,7 +156,7 @@ app.controller('MainController', function ($scope, $http, $timeout) {
 
     function initializeLayout() {
         $scope.showPanel = false;
-        $scope.mapStyle = MAP_HEIGHT_FULL;
+        $scope.mapStyle = getMapHeight();
         $scope.panelStyle = {};
     };
     initializeLayout();

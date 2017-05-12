@@ -40,8 +40,8 @@
     </nav>
 
     <div ng-controller="MainController" style="height:100%" class="ng-cloak">
-        <div id="map_canvas" ng-style="mapStyle" ng-click="closePanel()"></div>
-        <div ng-style="panelStyle" class="bikes-panel">
+        <div id="map_canvas" ng-style="mapStyle"></div>
+        <div ng-if="showPanel" ng-style="panelStyle" class="bikes-panel">
             <h1>Walking Distance: {{bikeData.distance.text}}
                 <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
             </h1>

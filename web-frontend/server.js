@@ -36,7 +36,7 @@ app.get('/api', function (req, res) {
 //     });
 // });
 
-var port = 5000;
+var port = 80;
 var server = app.listen(port, function () {
     console.log('Listening on port ' + port);
 });
