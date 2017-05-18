@@ -26,9 +26,9 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     function getAvailableBikes(map, currentPosition) {
         console.log("getting available bikes...");
         var BIKE_LOCATIONS = [
-            { latDiff: 0.001, lngDiff: 0.001 },
+            { latDiff: 0.0001, lngDiff: 0.001 },
             { latDiff: -0.001, lngDiff: -0.003 },
-            { latDiff: 0.0035, lngDiff: 0 }
+            { latDiff: 0.003, lngDiff: 0.0001 }
         ];
 
         for (var i = 0; i < BIKE_LOCATIONS.length; i++) {
@@ -66,8 +66,10 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         directionsDisplay.setMap($scope.map);
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
+            // TODO: getCurrentPosition only works on HTTPS! Hard code for now.
+            // navigator.geolocation.getCurrentPosition(function (position) {
+                // $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
+                $scope.position = { lat: 47.639488, lng: -122.134240 };
 
                 var marker = new google.maps.Marker({
                     position: $scope.position,
@@ -81,7 +83,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
                     getAvailableBikes($scope.map, $scope.position);
                 }, 2000);
 
-            });
+            // });
 
         }
     }, 100);
@@ -176,12 +178,19 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     };
 
     $scope.reserveBike = function (bikeData) {
-
+        $http.get("/api/reservebike?_=" + Date.now()).then(function (response) {
+            $scope.helloMessage = response.data;
+            $scope.bikeIsReserved = true;
+        });
     };
+
+    $scope.cancelReservation = function() {
+        $scope.bikeIsReserved = false;
+    }
 
     $scope.sayHelloToServer = function () {
         $http.get("/api?_=" + Date.now()).then(function (response) {
-            console.log(response.data);
+            $scope.helloMessage = response.data;
         });
     };
 });

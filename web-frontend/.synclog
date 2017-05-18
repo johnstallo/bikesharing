@@ -1,0 +1,21 @@
+﻿{
+  "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/web-frontend",
+  "Files": {
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.gitignore": "2017-05-11T23:42:55+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.synclog": "2017-05-18T00:02:36+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/Dockerfile": "2017-04-27T21:23:14+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/package.json": "2017-04-28T00:19:33+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/server.js": "2017-05-18T00:02:33+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/app.css": "2017-05-04T00:15:57+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/app.js": "2017-05-15T23:17:58+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/index.html": "2017-05-15T23:10:43+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/images/bike-icon.png": "2017-05-02T22:52:32+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/images/biker-128.png": "2017-05-01T19:34:06+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/images/male-icon.png": "2017-05-02T22:55:32+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/public/images/person-icon.png": "2017-05-02T22:53:53+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.vscode/debugSettings.json": "2017-05-17T07:41:01+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.vscode/launch.json": "2017-05-17T07:41:01+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.vscode/tasks.json": "2017-05-17T07:41:01+00:00"
+  },
+  "SyncTime": "2017-05-18T10:52:55.167999-07:00"
+}

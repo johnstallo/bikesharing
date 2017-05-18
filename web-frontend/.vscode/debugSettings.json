@@ -1,0 +1,34 @@
+{
+  "name": "NodeJS",
+  "supportedPlatforms": ["linux", "windows", "osx"],
+  "portTransport": 5858,
+  "localPort": 52519,
+  "commands": [
+    {
+      "command": "pkill -9 node",
+      "ignoreFailure": true
+    },
+    {
+      "command": "npm install",
+      "changeMatch": "packages.json"
+    },
+    {
+      "command": "node --debug-brk=5857 server.js",
+      "runInBackground": true
+    }
+  ],
+  "container": {
+    "remoteDebugEnabled": true,
+    "entrypoint": "[\"/bin/bash\", \"-c\", \"balance 5858 127.0.0.1:5857; sleep infinity\"]",
+    "injectCommands": [
+        "#Install balance to expose node debugger port",
+        "RUN apt-get update",
+        "RUN apt-get install -y balance",
+        "EXPOSE 5858"
+    ],
+    "workdir": "/usr/src/app",
+    "containerPath": "/usr/src/app",
+    "syncFrom": "",
+    "syncIgnore": "node_modules"
+  }
+}

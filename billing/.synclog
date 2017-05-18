@@ -1,0 +1,10 @@
+﻿{
+  "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/billing",
+  "Files": {
+    "/Users/johnstallo/repos/bikesharing/billing/billing.csproj": "2017-05-15T18:55:47+00:00",
+    "/Users/johnstallo/repos/bikesharing/billing/Dockerfile": "2017-05-15T18:55:47+00:00",
+    "/Users/johnstallo/repos/bikesharing/billing/Program.cs": "2017-05-15T18:55:47+00:00",
+    "/Users/johnstallo/repos/bikesharing/billing/Startup.cs": "2017-05-15T18:55:47+00:00"
+  },
+  "SyncTime": "2017-05-15T11:58:12.877046-07:00"
+}

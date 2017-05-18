@@ -1,0 +1,37 @@
+{
+  "name": ".NETCore",
+  "supportedPlatforms": ["linux", "windows", "osx"],
+  "commands": [
+    {
+      "command": "pkill -9 vsdbg",
+      "ignoreFailure": true
+    },
+    {
+      "command": "pkill -9 dotnet",
+      "ignoreFailure": true
+    },
+    {
+      "command": "dotnet restore",
+      "changeMatch": "*proj"
+    },
+    {
+      "command": "dotnet build ",
+      "changeMatch": "*|bin/;*|obj/"
+    }
+  ],
+  "container": {
+    "remoteDebugEnabled": true,
+    "entrypoint": "[\"/bin/bash\", \"-c\", \"sleep infinity\"]",
+    "injectCommands": [
+        "#Install vsdbg",
+        "RUN apt-get update",
+        "RUN apt-get install -y unzip",
+        "WORKDIR /vsdbg",
+        "RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg"  
+    ],
+    "workdir": "/app",
+    "containerPath": "/app",
+    "syncFrom": "",
+    "syncIgnore": "obj;bin"
+  }
+}

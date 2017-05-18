@@ -1,0 +1,9 @@
+﻿{
+  "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/users",
+  "Files": {
+    "/Users/johnstallo/repos/bikesharing/users/Dockerfile": "2017-05-15T18:57:55+00:00",
+    "/Users/johnstallo/repos/bikesharing/users/package.json": "2017-05-15T18:57:55+00:00",
+    "/Users/johnstallo/repos/bikesharing/users/server.js": "2017-05-15T18:57:55+00:00"
+  },
+  "SyncTime": "2017-05-15T11:59:45.363058-07:00"
+}

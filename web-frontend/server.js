@@ -20,21 +20,16 @@ app.get('/', function (req, res) {
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    
     res.send("Hello from service A");
-
-    // Invoke service-b
-    // request('http://service-b', function (error, response, body) {
-    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    // });
 });
 
-// app.get('/metrics', function (req, res) {
-// var redis = require('redis').createClient("redis://myredis");
-//     redis.get('requestCount', function (err, reply) {
-//         res.send({ requestCount: reply });
-//     });
-// });
+app.get('/api/reservebike', function (req, res) {
+    // Invoke reservation service
+    request('http://reservations', function (error, response, body) {
+        res.send(body + "SEND SOMETHING ELSE?");
+    });
+});
+
 
 var port = 80;
 var server = app.listen(port, function () {

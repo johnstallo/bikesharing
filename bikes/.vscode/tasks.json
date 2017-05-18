@@ -1,0 +1,47 @@
+{
+    "linux": {
+        "tasks": [
+            {
+                "command": "dotnet",
+                "taskName": "prepareDebug",
+                "suppressTaskName": true,
+                "args": [ "/Users/johnstallo/azp/tenx/tenx.dll", "debug", "start" ],
+                "isBuildCommand": false,
+                "showOutput": "always",
+                "options": {
+                    "cwd": "${workspaceRoot}"
+                }
+            }
+        ]
+    },
+    "osx": {
+       "tasks": [
+            {
+                "command": "dotnet",
+                "taskName": "prepareDebug",
+                "suppressTaskName": true,
+                "args": [ "/Users/johnstallo/azp/tenx/tenx.dll", "debug", "start" ],
+                "isBuildCommand": false,
+                "showOutput": "always",
+                "options": {
+                    "cwd": "${workspaceRoot}"
+                }
+            }
+        ]
+    },
+    "windows": {
+        "tasks": [
+            {
+                "command": "dotnet",
+                "taskName": "prepareDebug",
+                "suppressTaskName": true,
+                "args": [ "/Users/johnstallo/azp/tenx/tenx.dll", "debug", "start" ],
+                "isBuildCommand": false,
+                "showOutput": "always",
+                "options": {
+                    "cwd": "${workspaceRoot}"
+                }
+            }
+        ]
+    }
+}

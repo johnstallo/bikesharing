@@ -20,7 +20,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:white;">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
         <a class="navbar-brand" href="#" style="color:white;">BikeSharing</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,11 +42,20 @@
     <div ng-controller="MainController" style="height:100%" class="ng-cloak">
         <div id="map_canvas" ng-style="mapStyle"></div>
         <div ng-if="showPanel" ng-style="panelStyle" class="bikes-panel">
-            <h1>Walking Distance: {{bikeData.distance.text}}
-                <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
-            </h1>
-            <button class="btn btn-success" style="background-color: green;" ng-click="sayHelloToServer()">Reserve Bike</button>
-            
+            <div>
+                <h1 ng-if="!bikeIsReserved">Walking Distance: {{bikeData.distance.text}}
+                    <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
+                </h1>
+                <button ng-if="!bikeIsReserved" class="btn btn-success" style="background-color: green;" ng-click="reserveBike()">Reserve Bike</button>
+            </div>
+
+            <div ng-if="bikeIsReserved">
+                <h1>{{helloMessage}}
+                    <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
+                </h1>
+                <button class="btn btn-primary" ng-click="cancelReservation()">Cancel Reservation</button>
+            </div>
+
             <!--DEBUG-->
             <!--{{bikeData | json }}-->
         </div>
