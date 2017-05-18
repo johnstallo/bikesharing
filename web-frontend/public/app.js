@@ -26,22 +26,24 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     function getAvailableBikes(map, currentPosition) {
         console.log("getting available bikes...");
         // var availableBikes = [
-        //     { latDiff: 0.0001, lngDiff: 0.001 },
-        //     { latDiff: -0.001, lngDiff: -0.003 },
-        //     { latDiff: 0.003, lngDiff: 0.0001 }
+        //     { lat: 0.0001, lng: 0.001 },
+        //     { lat: -0.001, lng: -0.003 },
+        //     { lat: 0.003, lng: 0.0001 }
         // ];
 
-        $http.get("/api/availablebikes?_=" + Date.now()).then(function (response) {
+        var queryString = "?" + "lat=" + currentPosition.lat + "&lng=" + currentPosition.lng;
+        var serviceUrl = "/api/availablebikes" + queryString + "_=" + Date.now();
+        
+        $http.get(serviceUrl).then(function (response) {
             var availableBikes = response.data;
-            // availableBikes = availableBikes;
-            
+
             for (var i = 0; i < availableBikes.length; i++) {
                 var bikeData = {
                     id: i,
                     name: "bike" + i,
                 };
                 var marker = new google.maps.Marker({
-                    position: { lat: currentPosition.lat + availableBikes[i].latDiff, lng: currentPosition.lng + availableBikes[i].lngDiff },
+                    position: { lat: availableBikes[i].lat, lng: availableBikes[i].lng },
                     icon: '/images/bike-icon.png',
                     animation: google.maps.Animation.DROP,
                     map: map

@@ -16,15 +16,33 @@ app.get('/api', function (req, res) {
 });
 
 app.get('/api/getAvailableBikes', function (req, res) {
-    //res.send("hello from getAvailableBikes");
-    var bikeData = [
-        { latDiff: 0.0001, lngDiff: 0.001 },
-        { latDiff: -0.001, lngDiff: -0.003 },
-        { latDiff: 0.003, lngDiff: 0.0001 }
-    ];
-    res.send(bikeData);
+    var queryLat = parseFloat(req.query.lat);
+    var queryLng = parseFloat(req.query.lng);
+    var resultsCount = parseInt(req.query.count);
+
+    if (!queryLat || !queryLng) {
+        res.send(200, "lat and lng parameters are required.");
+    }
+
+    if (!resultsCount || resultsCount > bikeData.length) {
+        resultsCount = bikeData.length;
+    }
+
+    var availableBikes = [];
+    for (var i = 0; i < resultsCount; i++) {
+        availableBikes.push({ lat: queryLat + bikeData[i].lat, lng: queryLng + bikeData[i].lng });
+    }
+
+    res.send(availableBikes);
 });
 
+app.get('/api/test', function (req, res) {
+    var lat = req.query.lat;
+    var lng = req.query.lng;
+    var location = { lat: lat, lng: lng };
+    console.log('location: ' + lat + ', ' + lng);
+    res.send(location);
+});
 
 var port = 80;
 var server = app.listen(port, function () {
@@ -39,6 +57,14 @@ process.on("SIGTERM", () => {
     console.log("Terminating...");
     server.close();
 });
+
+//---------------------------------------
+// hard-coded data
+var bikeData = [
+    { lat: 0.0001, lng: 0.001 },
+    { lat: -0.001, lng: -0.003 },
+    { lat: 0.003, lng: 0.0001 }
+];
 
 
 // var mongoClient = require("mongodb").MongoClient;

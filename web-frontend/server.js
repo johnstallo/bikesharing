@@ -31,7 +31,11 @@ app.get('/api/reservebike', function (req, res) {
 });
 
 app.get('/api/availablebikes', function (req, res) {
-    request('http://bikes/api/getAvailableBikes', function (error, response, body) {
+    // forward query string as-is
+    var bikeServiceUrl = req.url.replace("/api/availablebikes", 'http://bikes/api/getAvailableBikes');
+
+    // Get available bikes
+    request(bikeServiceUrl, function (error, response, body) {
         res.send(body);
     });
 });
