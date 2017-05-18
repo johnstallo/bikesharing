@@ -21,7 +21,7 @@ app.get('/api/getAvailableBikes', function (req, res) {
     var resultsCount = parseInt(req.query.count);
 
     if (!queryLat || !queryLng) {
-        res.send(200, "lat and lng parameters are required.");
+        res.status(500).send("lat and lng parameters are required.");
     }
 
     if (!resultsCount || resultsCount > bikeData.length) {
