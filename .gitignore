@@ -57,3 +57,5 @@ typings/
 
 # dotenv environment variables file
 .env
+bikes/.synclog
+web-frontend/.synclog
