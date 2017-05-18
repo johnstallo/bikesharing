@@ -9,13 +9,13 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     $scope.markers = [];
     $scope.position = { lat: 39.8282, lng: -98.5795 };
     var ROADMAP = 'roadmap';
-    
+
     $scope.initialMapOptions = {
         zoom: 4,
         center: $scope.position,
         mapTypeId: ROADMAP
     };
-    
+
     $scope.mapOptions = {
         zoom: 17,
         center: $scope.position,
@@ -25,28 +25,33 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     $scope.availableBikes = [];
     function getAvailableBikes(map, currentPosition) {
         console.log("getting available bikes...");
-        var BIKE_LOCATIONS = [
-            { latDiff: 0.0001, lngDiff: 0.001 },
-            { latDiff: -0.001, lngDiff: -0.003 },
-            { latDiff: 0.003, lngDiff: 0.0001 }
-        ];
+        // var availableBikes = [
+        //     { latDiff: 0.0001, lngDiff: 0.001 },
+        //     { latDiff: -0.001, lngDiff: -0.003 },
+        //     { latDiff: 0.003, lngDiff: 0.0001 }
+        // ];
 
-        for (var i = 0; i < BIKE_LOCATIONS.length; i++) {
-            var bikeData = {
-                id: i,
-                name: "bike" + i,
-            };
-            var marker = new google.maps.Marker({
-                position: { lat: currentPosition.lat + BIKE_LOCATIONS[i].latDiff, lng: currentPosition.lng + BIKE_LOCATIONS[i].lngDiff },
-                icon: '/images/bike-icon.png',
-                animation: google.maps.Animation.DROP,
-                map: map
-            });
+        $http.get("/api/availablebikes?_=" + Date.now()).then(function (response) {
+            var availableBikes = response.data;
+            // availableBikes = availableBikes;
+            
+            for (var i = 0; i < availableBikes.length; i++) {
+                var bikeData = {
+                    id: i,
+                    name: "bike" + i,
+                };
+                var marker = new google.maps.Marker({
+                    position: { lat: currentPosition.lat + availableBikes[i].latDiff, lng: currentPosition.lng + availableBikes[i].lngDiff },
+                    icon: '/images/bike-icon.png',
+                    animation: google.maps.Animation.DROP,
+                    map: map
+                });
 
-            bikeData.position = marker.position;
-            attachBikeData(marker, bikeData);
-            $scope.availableBikes.push(bikeData);
-        }
+                bikeData.position = marker.position;
+                attachBikeData(marker, bikeData);
+                $scope.availableBikes.push(bikeData);
+            }
+        });
     };
 
     function attachBikeData(marker, bikeData) {
@@ -68,20 +73,20 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         if (navigator.geolocation) {
             // TODO: getCurrentPosition only works on HTTPS! Hard code for now.
             // navigator.geolocation.getCurrentPosition(function (position) {
-                // $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
-                $scope.position = { lat: 47.639488, lng: -122.134240 };
+            // $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
+            $scope.position = { lat: 47.639488, lng: -122.134240 };
 
-                var marker = new google.maps.Marker({
-                    position: $scope.position,
-                    map: $scope.map
-                });
+            var marker = new google.maps.Marker({
+                position: $scope.position,
+                map: $scope.map
+            });
 
-                $scope.map.setCenter($scope.position);
-                // $scope.map.setZoom($scope.mapOptions.zoom-1);
-                smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
-                $timeout(function () {
-                    getAvailableBikes($scope.map, $scope.position);
-                }, 2000);
+            $scope.map.setCenter($scope.position);
+            // $scope.map.setZoom($scope.mapOptions.zoom-1);
+            smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
+            $timeout(function () {
+                getAvailableBikes($scope.map, $scope.position);
+            }, 2000);
 
             // });
 
@@ -119,7 +124,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         if (panelIsVisible) {
             var MAP_PANEL_RATIO = 0.8;
             var MAX_PANEL_HEIGHT = 120;
-            var panelHeight = maxMapHeightPixels * (1-MAP_PANEL_RATIO);
+            var panelHeight = maxMapHeightPixels * (1 - MAP_PANEL_RATIO);
             if (panelHeight > MAX_PANEL_HEIGHT) {
                 maxMapHeightPixels = maxMapHeightPixels - MAX_PANEL_HEIGHT;
             }
@@ -184,7 +189,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         });
     };
 
-    $scope.cancelReservation = function() {
+    $scope.cancelReservation = function () {
         $scope.bikeIsReserved = false;
     }
 

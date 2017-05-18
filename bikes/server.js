@@ -1,39 +1,28 @@
-var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
-if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
-    var appInsights = require('applicationinsights').setup().start();
-    appInsights.client.commonProperties = {
-        "Service name": require("./package.json").name
-    };
-}
 var express = require('express');
 
 var app = express();
-app.use(express.static(__dirname + '/public'));
 app.use(morgan("dev"));
 
 // application -------------------------------------------------------------
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/public/index.html');
+    res.send("hello from bikes");
 });
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    res.send("Hello from service A");
+    res.send("Hello from bikes/api");
 });
 
-app.get('/api/reservebike', function (req, res) {
-    // Invoke reservation service
-    request('http://reservations', function (error, response, body) {
-        res.send(body);
-    });
-});
-
-app.get('/api/availablebikes', function (req, res) {
-    request('http://bikes/api/getAvailableBikes', function (error, response, body) {
-        res.send(body);
-    });
+app.get('/api/getAvailableBikes', function (req, res) {
+    //res.send("hello from getAvailableBikes");
+    var bikeData = [
+        { latDiff: 0.0001, lngDiff: 0.001 },
+        { latDiff: -0.001, lngDiff: -0.003 },
+        { latDiff: 0.003, lngDiff: 0.0001 }
+    ];
+    res.send(bikeData);
 });
 
 

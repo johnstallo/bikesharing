@@ -1,0 +1,11 @@
+{
+  "name": "bikes",
+  "version": "0.1.0",
+  "description": "Bikes service",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.2.26",
+    "morgan": "^1.7.0",
+    "request": "^2.71.0"
+  }
+}

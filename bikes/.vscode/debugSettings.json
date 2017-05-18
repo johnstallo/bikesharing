@@ -1,37 +1,34 @@
 {
-  "name": ".NETCore",
+  "name": "NodeJS",
   "supportedPlatforms": ["linux", "windows", "osx"],
+  "portTransport": 5858,
+  "localPort": 53764,
   "commands": [
     {
-      "command": "pkill -9 vsdbg",
+      "command": "pkill -9 node",
       "ignoreFailure": true
     },
     {
-      "command": "pkill -9 dotnet",
-      "ignoreFailure": true
+      "command": "npm install",
+      "changeMatch": "packages.json"
     },
     {
-      "command": "dotnet restore",
-      "changeMatch": "*proj"
-    },
-    {
-      "command": "dotnet build ",
-      "changeMatch": "*|bin/;*|obj/"
+      "command": "node --debug-brk=5857 server.js",
+      "runInBackground": true
     }
   ],
   "container": {
     "remoteDebugEnabled": true,
-    "entrypoint": "[\"/bin/bash\", \"-c\", \"sleep infinity\"]",
+    "entrypoint": "[\"/bin/bash\", \"-c\", \"balance 5858 127.0.0.1:5857; sleep infinity\"]",
     "injectCommands": [
-        "#Install vsdbg",
+        "#Install balance to expose node debugger port",
         "RUN apt-get update",
-        "RUN apt-get install -y unzip",
-        "WORKDIR /vsdbg",
-        "RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg"  
+        "RUN apt-get install -y balance",
+        "EXPOSE 5858"
     ],
-    "workdir": "/app",
-    "containerPath": "/app",
+    "workdir": "/usr/src/app",
+    "containerPath": "/usr/src/app",
     "syncFrom": "",
-    "syncIgnore": "obj;bin"
+    "syncIgnore": "node_modules"
   }
 }

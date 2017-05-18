@@ -1,17 +1,13 @@
 ﻿{
   "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/bikes",
   "Files": {
-    "/Users/johnstallo/repos/bikesharing/bikes/.synclog": "2017-05-15T18:52:00+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/bikes.csproj": "2017-05-12T20:00:49+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/Dockerfile": "2017-05-15T18:51:56+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/Program.cs": "2017-05-12T20:00:49+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/Startup.cs": "2017-05-12T22:44:40+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/obj/bikes.csproj.nuget.g.props": "2017-05-15T18:43:30+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/obj/bikes.csproj.nuget.g.targets": "2017-05-15T18:43:30+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/obj/project.assets.json": "2017-05-15T18:43:30+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/debugSettings.json": "2017-05-12T21:50:48+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/launch.json": "2017-05-15T18:43:33+00:00",
-    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/tasks.json": "2017-05-12T21:50:48+00:00"
+    "/Users/johnstallo/repos/bikesharing/bikes/.synclog": "2017-05-18T18:31:03+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/Dockerfile": "2017-05-18T18:14:42+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/package.json": "2017-05-18T18:17:30+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/server.js": "2017-05-18T18:27:37+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/debugSettings.json": "2017-05-18T18:30:51+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/launch.json": "2017-05-18T18:30:51+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/.vscode/tasks.json": "2017-05-18T18:30:51+00:00"
   },
-  "SyncTime": "2017-05-15T14:39:07.27702-07:00"
+  "SyncTime": "2017-05-18T11:33:30.743848-07:00"
 }
