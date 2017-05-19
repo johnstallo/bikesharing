@@ -18,19 +18,23 @@ app.get('/api', function (req, res) {
 app.get('/api/getAvailableBikes', function (req, res) {
     var queryLat = parseFloat(req.query.lat);
     var queryLng = parseFloat(req.query.lng);
-    var resultsCount = parseInt(req.query.count);
-
     if (!queryLat || !queryLng) {
         res.status(500).send("lat and lng parameters are required.");
     }
 
+    var resultsCount = parseInt(req.query.count);
     if (!resultsCount || resultsCount > bikeData.length) {
         resultsCount = bikeData.length;
     }
 
     var availableBikes = [];
     for (var i = 0; i < resultsCount; i++) {
-        availableBikes.push({ lat: queryLat + bikeData[i].lat, lng: queryLng + bikeData[i].lng });
+        var bike = bikeData[i];
+        if (bike.available) {
+            bike.position.lat += queryLat;
+            bike.position.lng += queryLng;
+            availableBikes.push(bike);
+        }
     }
 
     res.send(availableBikes);
@@ -61,9 +65,9 @@ process.on("SIGTERM", () => {
 //---------------------------------------
 // hard-coded data
 var bikeData = [
-    { lat: 0.0001, lng: 0.001 },
-    { lat: -0.001, lng: -0.003 },
-    { lat: 0.003, lng: 0.0001 }
+    { id: 0, available: true, position: { lat: 0.0001, lng: 0.001 } },
+    { id: 1, available: false, position: { lat: -0.001, lng: -0.003 } },
+    { id: 2, available: true, position: { lat: 0.003, lng: 0.0001 } }
 ];
 
 

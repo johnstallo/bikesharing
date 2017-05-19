@@ -7,7 +7,8 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     // var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
     $scope.map = null;
     $scope.markers = [];
-    $scope.position = { lat: 39.8282, lng: -98.5795 };
+    var BUILDING_43 = { lat: 47.639488, lng: -122.134240 };
+    var BUILDING_18 = { lat: 47.6443, lng: -122.1296 };
     var ROADMAP = 'roadmap';
 
     $scope.initialMapOptions = {
@@ -25,11 +26,6 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
     $scope.availableBikes = [];
     function getAvailableBikes(map, currentPosition) {
         console.log("getting available bikes...");
-        // var availableBikes = [
-        //     { lat: 0.0001, lng: 0.001 },
-        //     { lat: -0.001, lng: -0.003 },
-        //     { lat: 0.003, lng: 0.0001 }
-        // ];
 
         var queryString = "?" + "lat=" + currentPosition.lat + "&lng=" + currentPosition.lng;
         var serviceUrl = "/api/availablebikes" + queryString + "_=" + Date.now();
@@ -43,7 +39,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
                     name: "bike" + i,
                 };
                 var marker = new google.maps.Marker({
-                    position: { lat: availableBikes[i].lat, lng: availableBikes[i].lng },
+                    position: { lat: availableBikes[i].position.lat, lng: availableBikes[i].position.lng },
                     icon: '/images/bike-icon.png',
                     animation: google.maps.Animation.DROP,
                     map: map
@@ -76,7 +72,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
             // TODO: getCurrentPosition only works on HTTPS! Hard code for now.
             // navigator.geolocation.getCurrentPosition(function (position) {
             // $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
-            $scope.position = { lat: 47.639488, lng: -122.134240 };
+            $scope.position = BUILDING_18;
 
             var marker = new google.maps.Marker({
                 position: $scope.position,
