@@ -27,18 +27,25 @@ app.get('/api/getAvailableBikes', function (req, res) {
         resultsCount = bikeData.length;
     }
 
-    var availableBikes = [];
-    for (var i = 0; i < resultsCount; i++) {
+    var availableBikes = searchAvailableBikes(queryLat, queryLng, resultsCount);;
+
+    console.log("Found available bikes: %j", availableBikes);
+    res.send(availableBikes);
+});
+
+function searchAvailableBikes(lat, lng, count) {
+    count = count > bikeData.length ? count = bikeData.length : count;
+    var result = [];    
+    
+    for (var i = 0; i < count; i++) {
         var bike = bikeData[i];
         if (bike.available) {
-            bike.position.lat += queryLat;
-            bike.position.lng += queryLng;
-            availableBikes.push(bike);
+            result.push({id: bike.id, position: {lat: bike.position.lat+lat, lng: bike.position.lng+lng}});
         }
     }
 
-    res.send(availableBikes);
-});
+    return result;
+}
 
 app.get('/api/test', function (req, res) {
     var lat = req.query.lat;
