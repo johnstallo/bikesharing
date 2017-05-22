@@ -3,10 +3,7 @@ var app = angular.module('myApp', []);
 
 app.controller('MainController', function ($scope, $http, $timeout, $window, $log) {
 
-    // var MAP_HEIGHT_FULL = { width: '100%', height: '93%' };
-    // var MAP_HEIGHT_PARTIAL = { width: '100%', height: '80%' };
     $scope.map = null;
-    $scope.markers = [];
     var BUILDING_43 = { lat: 47.639488, lng: -122.134240 };
     var BUILDING_18 = { lat: 47.6443, lng: -122.1296 };
     var ROADMAP = 'roadmap';
@@ -28,7 +25,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         console.log("getting available bikes...");
 
         var queryString = "?" + "lat=" + currentPosition.lat + "&lng=" + currentPosition.lng;
-        var serviceUrl = "/api/availablebikes" + queryString + "_=" + Date.now();
+        var serviceUrl = "/api/availablebikes" + queryString + "&_=" + Date.now();
         
         $http.get(serviceUrl).then(function (response) {
             var availableBikes = response.data;
@@ -130,9 +127,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
                 maxMapHeightPixels = maxMapHeightPixels * MAP_PANEL_RATIO;
             }
         }
-
         var mapHeight = (maxMapHeightPixels / $window.innerHeight) * 100 + "%";
-        console.log("mapheight: ", mapHeight);
         return { width: '100%', height: mapHeight };
     }
     var MAP_STYLE_PARTIAL = calculateMapHeight(true);
@@ -182,18 +177,17 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
 
     $scope.reserveBike = function (bikeData) {
         $http.get("/api/reservebike?_=" + Date.now()).then(function (response) {
-            $scope.helloMessage = response.data;
+            $scope.reservationMessage = response.data;
             $scope.bikeIsReserved = true;
         });
     };
 
     $scope.cancelReservation = function () {
         $scope.bikeIsReserved = false;
-    }
-
-    $scope.sayHelloToServer = function () {
-        $http.get("/api?_=" + Date.now()).then(function (response) {
-            $scope.helloMessage = response.data;
-        });
     };
+
+    $scope.estimateMinutesToWalk = function (distanceMiles) {
+        //Note: Unit for distanceMiles.value is meters
+        return Math.round((distanceMiles.value / 1000) * 20);
+    }
 });

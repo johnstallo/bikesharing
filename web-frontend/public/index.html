@@ -43,14 +43,14 @@
         <div id="map_canvas" ng-style="mapStyle"></div>
         <div ng-if="showPanel" ng-style="panelStyle" class="bikes-panel">
             <div>
-                <h1 ng-if="!bikeIsReserved">Walking Distance: {{bikeData.distance.text}}
+                <h1 ng-if="!bikeIsReserved">Walking Distance: {{bikeData.distance.text}} (about {{estimateMinutesToWalk(bikeData.distance)}} mins)
                     <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
                 </h1>
                 <button ng-if="!bikeIsReserved" class="btn btn-success" style="background-color: green;" ng-click="reserveBike()">Reserve Bike</button>
             </div>
 
             <div ng-if="bikeIsReserved">
-                <h1>{{helloMessage}}
+                <h1>{{reservationMessage}}
                     <div style="float:right; padding-right:5px;"><i class="fa fa-times" ng-click="closePanel()" style="cursor: pointer;"></i></div>
                 </h1>
                 <button class="btn btn-primary" ng-click="cancelReservation()">Cancel Reservation</button>
