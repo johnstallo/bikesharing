@@ -2,10 +2,10 @@
   "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/web-frontend",
   "Files": {
     "/Users/johnstallo/repos/bikesharing/web-frontend/.gitignore": "2017-05-18T21:04:23+00:00",
-    "/Users/johnstallo/repos/bikesharing/web-frontend/.synclog": "2017-05-23T23:55:11+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/.synclog": "2017-05-23T23:56:35+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/Dockerfile": "2017-04-27T21:23:14+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/package.json": "2017-04-28T00:19:33+00:00",
-    "/Users/johnstallo/repos/bikesharing/web-frontend/server.js": "2017-05-23T23:56:32+00:00",
+    "/Users/johnstallo/repos/bikesharing/web-frontend/server.js": "2017-05-24T01:22:32+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/public/app.css": "2017-05-04T00:15:57+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/public/app.js": "2017-05-22T22:24:19+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/public/index.html": "2017-05-22T21:54:37+00:00",
@@ -17,5 +17,5 @@
     "/Users/johnstallo/repos/bikesharing/web-frontend/.vscode/launch.json": "2017-05-17T07:41:01+00:00",
     "/Users/johnstallo/repos/bikesharing/web-frontend/.vscode/tasks.json": "2017-05-17T07:41:01+00:00"
   },
-  "SyncTime": "2017-05-23T16:56:35.218175-07:00"
+  "SyncTime": "2017-05-23T18:22:36.988109-07:00"
 }
