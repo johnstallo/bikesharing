@@ -21,7 +21,8 @@ namespace reservations
         {
         }
 
-        private string reserveBike(HttpResponseMessage response) {
+        private string reserveBike(HttpResponseMessage response)
+        {
             return "Reservation confirmed";
         }
 
@@ -37,7 +38,25 @@ namespace reservations
 
             app.Run(async (context) =>
             {
+                // Check billing
+                using (var client = new HttpClient())
+                {
+                    try
+                    {
+                        client.BaseAddress = new Uri("http://billing");
+                        var billingResponse = await client.GetAsync("/");
+                        if (!billingResponse.IsSuccessStatusCode)
+                        {
+                            await context.Response.WriteAsync("Reservation error");
+                        }
+                    }
+                    catch (HttpRequestException e)
+                    {
+                        Console.WriteLine($"Request exception: {e.Message}");
+                    }
+                }
 
+                // Reserve bike
                 using (var client = new HttpClient())
                 {
                     try
@@ -51,12 +70,41 @@ namespace reservations
 
                         // send reservation confirmation
                         await context.Response.WriteAsync(confirmation);
+                        
                     }
                     catch (HttpRequestException e)
                     {
                         Console.WriteLine($"Request exception: {e.Message}");
                     }
                 }
+
+                // using (var client = new HttpClient())
+                // {
+                //     try
+                //     {
+                //         // get bike info
+                //         client.BaseAddress = new Uri("http://bikes");
+                //         var response = await client.GetAsync("/");
+
+                //         client.BaseAddress = new Uri("http://bikes");
+                //         var billingResponse = await client.GetAsync("/");
+
+                //         if (billingResponse.IsSuccessStatusCode) {
+                //             // reserve bike
+                //             var confirmation = reserveBike(response);
+
+                //             // send reservation confirmation
+                //             await context.Response.WriteAsync(confirmation);
+                //         }
+                //         else {
+                //             await context.Response.WriteAsync("Reservation error");
+                //         }
+                //     }
+                //     catch (HttpRequestException e)
+                //     {
+                //         Console.WriteLine($"Request exception: {e.Message}");
+                //     }
+                // }
             });
         }
     }

@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":".NET Core Docker Launch (Mindaro)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "prepareDebug",
+            "cwd": "/app",
+            "program": "/app/bin/Debug/netcoreapp1.1/notifications.dll",
+            "sourceFileMap": {
+                "/app/": "${workspaceRoot}"
+            },
+            "pipeTransport": {
+                "pipeProgram": "/usr/local/share/dotnet/dotnet",
+                "pipeCwd": "${workspaceRoot}",
+                "debuggerPath": "/vsdbg/vsdbg",
+                "pipeArgs": [ "/Users/johnstallo/azp/tenx/tenx.dll", "pipe", "start", "--args" ],
+                "windows": {
+                    "pipeProgram": "${env.programfiles}\\dotnet\\dotnet.exe"
+                }
+            }
+        }
+    ]
+}

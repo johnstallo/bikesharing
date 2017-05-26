@@ -1,10 +1,8 @@
-FROM microsoft/dotnet:sdk
-WORKDIR /app
-COPY billing.csproj .
-RUN dotnet restore billing.csproj
+FROM node
+WORKDIR /usr/src/billing/
+COPY package.json .
+CMD npm restore
 COPY . .
-RUN dotnet publish -o out billing.csproj
-ENV ASPNETCORE_URLS http://*:80
 EXPOSE 80
-ENTRYPOINT ["dotnet", "out/billing.dll"]
+ENTRYPOINT ["npm", "start"]
 HEALTHCHECK CMD curl --fail http://localhost:80/ || exit 1

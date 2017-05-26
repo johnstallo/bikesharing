@@ -188,6 +188,9 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
 
     $scope.estimateMinutesToWalk = function (distanceMiles) {
         //Note: Unit for distanceMiles.value is meters
-        return Math.round((distanceMiles.value / 1000) * 20);
+        if (distanceMiles) {
+            return Math.round((distanceMiles.value / 1000) * 20);
+        }
+        return 0;
     }
 });
