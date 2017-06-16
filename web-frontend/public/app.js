@@ -31,18 +31,15 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
             var availableBikes = response.data;
 
             for (var i = 0; i < availableBikes.length; i++) {
-                var bikeData = {
-                    id: i,
-                    name: "bike" + i,
-                };
+                var bikeData = availableBikes[i];
                 var marker = new google.maps.Marker({
-                    position: { lat: availableBikes[i].position.lat, lng: availableBikes[i].position.lng },
+                    position: bikeData.position,
                     icon: '/images/bike-icon.png',
                     animation: google.maps.Animation.DROP,
                     map: map
                 });
 
-                bikeData.position = marker.position;
+                // bikeData.position = marker.position;
                 attachBikeData(marker, bikeData);
                 $scope.availableBikes.push(bikeData);
             }
