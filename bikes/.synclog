@@ -1,7 +1,7 @@
 ﻿{
-  "RemoteRoot": "https://pzirffrcwks.file.core.windows.net/mindaro/default/johnstallo/bikes",
+  "RemoteRoot": "https://gm517l2fwks.file.core.windows.net/mindaro/default/johnstallo/bikes",
   "Files": {
-    "/Users/johnstallo/repos/bikesharing/bikes/.synclog": "2017-06-16T00:38:58+00:00",
+    "/Users/johnstallo/repos/bikesharing/bikes/.synclog": "2017-06-21T20:35:23+00:00",
     "/Users/johnstallo/repos/bikesharing/bikes/Dockerfile": "2017-06-16T01:21:33+00:00",
     "/Users/johnstallo/repos/bikesharing/bikes/package.json": "2017-05-18T18:17:30+00:00",
     "/Users/johnstallo/repos/bikesharing/bikes/server.js": "2017-05-23T23:50:02+00:00",
@@ -9,5 +9,5 @@
     "/Users/johnstallo/repos/bikesharing/bikes/.vscode/launch.json": "2017-05-18T18:30:51+00:00",
     "/Users/johnstallo/repos/bikesharing/bikes/.vscode/tasks.json": "2017-05-18T18:30:51+00:00"
   },
-  "SyncTime": "2017-06-15T18:21:35.5654-07:00"
+  "SyncTime": "2017-06-21T13:37:10.832165-07:00"
 }

@@ -26,7 +26,7 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
 
         var queryString = "?" + "lat=" + currentPosition.lat + "&lng=" + currentPosition.lng;
         var serviceUrl = "/api/availablebikes" + queryString + "&_=" + Date.now();
-        
+
         $http.get(serviceUrl).then(function (response) {
             var availableBikes = response.data;
 
@@ -63,25 +63,22 @@ app.controller('MainController', function ($scope, $http, $timeout, $window, $lo
         directionsDisplay.setMap($scope.map);
 
         if (navigator.geolocation) {
-            // TODO: getCurrentPosition only works on HTTPS! Hard code for now.
-            // navigator.geolocation.getCurrentPosition(function (position) {
-            // $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
-            $scope.position = BUILDING_18;
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $scope.position = { lat: position.coords.latitude, lng: position.coords.longitude };
+                
+                var marker = new google.maps.Marker({
+                    position: $scope.position,
+                    map: $scope.map
+                });
 
-            var marker = new google.maps.Marker({
-                position: $scope.position,
-                map: $scope.map
+                $scope.map.setCenter($scope.position);
+                // $scope.map.setZoom($scope.mapOptions.zoom-1);
+                smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
+                $timeout(function () {
+                    getAvailableBikes($scope.map, $scope.position);
+                }, 2000);
+
             });
-
-            $scope.map.setCenter($scope.position);
-            // $scope.map.setZoom($scope.mapOptions.zoom-1);
-            smoothZoom($scope.map, $scope.mapOptions.zoom, $scope.map.getZoom());
-            $timeout(function () {
-                getAvailableBikes($scope.map, $scope.position);
-            }, 2000);
-
-            // });
-
         }
     }, 100);
 

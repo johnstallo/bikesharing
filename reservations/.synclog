@@ -1,8 +1,8 @@
 ﻿{
-  "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/reservations",
+  "RemoteRoot": "https://gm517l2fwks.file.core.windows.net/mindaro/default/johnstallo/reservations",
   "Files": {
     "/Users/johnstallo/repos/bikesharing/reservations/.dockerignore": "2017-05-15T19:21:31+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/.synclog": "2017-05-26T21:05:50+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/.synclog": "2017-05-26T22:41:25+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/Dockerfile": "2017-05-15T19:22:08+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/Program.cs": "2017-05-15T18:56:03+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/reservations.csproj": "2017-05-15T18:56:03+00:00",
@@ -14,5 +14,5 @@
     "/Users/johnstallo/repos/bikesharing/reservations/.vscode/launch.json": "2017-05-15T19:09:38+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/.vscode/tasks.json": "2017-05-15T19:09:32+00:00"
   },
-  "SyncTime": "2017-05-26T15:41:25.325301-07:00"
+  "SyncTime": "2017-06-21T14:13:22.5425-07:00"
 }
