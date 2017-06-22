@@ -73,7 +73,7 @@ process.on("SIGTERM", () => {
 //---------------------------------------
 // hard-coded data
 var bikeData = [
-    { id: "ABC", available: true, position: { lat: 0.0001, lng: 0.001 } },
+    { id: "ABC", available: true, position: { lat: 0.0008, lng: 0.0015 } },
     { id: "BCD", available: true, position: { lat: -0.001, lng: -0.003 } },
     { id: "CDE", available: true, position: { lat: 0.003, lng: 0.0001 } },
     { id: "DEF", available: true, position: { lat: -0.003, lng: 0.003 } }
