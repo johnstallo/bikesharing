@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    res.send("Hello from bikes/api");
+    res.send("Hello from bikes/api!!\n");
 });
 
 app.get('/api/getAvailableBikes', function (req, res) {

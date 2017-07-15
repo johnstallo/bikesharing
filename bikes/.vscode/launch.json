@@ -2,11 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name":"NodeJS Launch (Mindaro)",
+            "name":"NodeJS Launch (Azp)",
             "type": "node",
             "request": "attach",
+            "protocol": "inspector",
             "preLaunchTask": "prepareDebug",
-            "port": 53764,
+            "port": 61328,
             "address": "127.0.0.1",
             "localRoot": "${workspaceRoot}",
             "remoteRoot": "/usr/src/app"
