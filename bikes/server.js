@@ -7,12 +7,16 @@ app.use(morgan("dev"));
 
 // application -------------------------------------------------------------
 app.get('/', function (req, res) {
-    res.send("hello from bikes");
+    res.send("hello from bikes\n");
 });
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
     res.send("Hello from bikes/api!!\n");
+});
+
+app.get('/api/bike', function (req, res) {
+    res.send("111-222");
 });
 
 app.get('/api/getAvailableBikes', function (req, res) {
@@ -30,7 +34,7 @@ app.get('/api/getAvailableBikes', function (req, res) {
 
     var availableBikes = searchAvailableBikes(queryLat, queryLng, resultsCount);;
 
-    console.log("Found available bikes: %j", availableBikes);
+    console.log("Found available bikes: %j .", availableBikes);
     res.send(availableBikes);
 });
 

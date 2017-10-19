@@ -8,7 +8,6 @@
                 "start"
             ],
             "taskName": "prepareDebug",
-            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}"
             },

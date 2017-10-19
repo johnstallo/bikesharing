@@ -2,30 +2,14 @@
   "name": "NodeJS",
   "supportedPlatforms": ["linux", "windows", "osx"],
   "portTransport": 5858,
-  "localPort": 63102,
+  "localPort": 53485,
   "commands": [
-    {
-      "command": "pkill -9 node",
-      "ignoreFailure": true
-    },
-    {
-      "command": "npm install",
-      "changeMatch": "packages.json"
-    },
-    {
-      "command": "node --debug-brk --debug=0.0.0.0:5858 --inspect server.js",
-      "runInBackground": true
-    }
   ],
   "container": {
     "remoteDebugEnabled": true,
     "entrypoint": "[\"/bin/bash\", \"-c\", \"sleep infinity\"]",
-    "injectCommands": [
-        "#Expose node debugger port",
-        "EXPOSE 5858"
-    ],
-    "workdir": "/usr/src/app",
-    "containerPath": "/usr/src/app",
+    "workdir": "/app",
+    "containerPath": "/app",
     "syncFrom": "",
     "syncIgnore": "node_modules"
   }

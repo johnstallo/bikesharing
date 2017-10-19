@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "prepareDebug",
             "cwd": "/app",
-            "program": "/app/bin/Debug/netcoreapp1.1/reservations.dll",
+            "program": "/app/bin/Debug/netcoreapp2.0/reservations.dll",
             "sourceFileMap": {
                 "/app/": "${workspaceRoot}"
             },

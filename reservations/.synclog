@@ -1,18 +1,22 @@
 ﻿{
-  "RemoteRoot": "https://kox61lrlwks.file.core.windows.net/mindaro/default/johnstallo/reservations",
+  "RemoteRoot": "https://sbz18773stg.file.core.windows.net/mindaro/default/reservations",
   "Files": {
     "/Users/johnstallo/repos/bikesharing/reservations/.dockerignore": "2017-05-15T19:21:31+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/.synclog": "2017-06-21T21:13:22+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/Dockerfile": "2017-05-15T19:22:08+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/.synclog": "2017-10-04T17:39:23+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/Dockerfile": "2017-10-04T16:53:27+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/Program.cs": "2017-05-15T18:56:03+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/reservations.csproj": "2017-05-15T18:56:03+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/reservations.csproj": "2017-10-04T17:02:39+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/Startup.cs": "2017-05-24T01:58:36+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/obj/project.assets.json": "2017-05-15T19:03:18+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/obj/reservations.csproj.nuget.g.props": "2017-05-15T19:03:18+00:00",
     "/Users/johnstallo/repos/bikesharing/reservations/obj/reservations.csproj.nuget.g.targets": "2017-05-15T19:03:18+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/debugSettings.json": "2017-07-14T23:22:31+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/launch.json": "2017-07-14T23:22:31+00:00",
-    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/tasks.json": "2017-07-14T23:22:31+00:00"
+    "/Users/johnstallo/repos/bikesharing/reservations/obj/Debug/netcoreapp2.0/reservations.AssemblyInfo.cs": "2017-10-04T17:02:39+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/obj/Debug/netcoreapp2.0/reservations.csproj.CoreCompileInputs.cache": "2017-10-04T17:02:39+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/obj/Debug/netcoreapp1.1/reservations.AssemblyInfo.cs": "2017-09-29T23:34:24+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/obj/Debug/netcoreapp1.1/reservations.csproj.CoreCompileInputs.cache": "2017-09-29T23:34:24+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/debugSettings.json": "2017-10-04T17:39:11+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/launch.json": "2017-10-04T17:39:11+00:00",
+    "/Users/johnstallo/repos/bikesharing/reservations/.vscode/tasks.json": "2017-10-04T17:39:11+00:00"
   },
-  "SyncTime": "2017-07-14T16:23:07.132397-07:00"
+  "SyncTime": "2017-10-04T10:39:53.862881-07:00"
 }

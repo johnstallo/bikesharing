@@ -1,11 +1,11 @@
 ﻿{
-  "RemoteRoot": "https://kubeacsf2qg2cwks.file.core.windows.net/mindaro/default/johnstallo/billing",
+  "RemoteRoot": "https://sbz18773stg.file.core.windows.net/mindaro/default/billing",
   "Files": {
     "/Users/johnstallo/repos/bikesharing/billing/.dockerignore": "2017-05-15T19:21:09+00:00",
-    "/Users/johnstallo/repos/bikesharing/billing/.synclog": "2017-05-15T18:58:12+00:00",
+    "/Users/johnstallo/repos/bikesharing/billing/.synclog": "2017-05-24T01:47:21+00:00",
     "/Users/johnstallo/repos/bikesharing/billing/Dockerfile": "2017-05-24T01:47:11+00:00",
     "/Users/johnstallo/repos/bikesharing/billing/package.json": "2017-05-24T01:47:11+00:00",
     "/Users/johnstallo/repos/bikesharing/billing/server.js": "2017-05-24T01:47:11+00:00"
   },
-  "SyncTime": "2017-05-23T18:47:21.623979-07:00"
+  "SyncTime": "2017-10-04T10:42:06.617402-07:00"
 }

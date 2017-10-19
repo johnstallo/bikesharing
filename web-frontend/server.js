@@ -1,6 +1,8 @@
 var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
+var contextful = require('./contextful');
+
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
     var appInsights = require('applicationinsights').setup().start();
     appInsights.client.commonProperties = {
@@ -25,7 +27,12 @@ app.get('/api', function (req, res) {
 
 app.get('/api/reservebike', function (req, res) {
     // Invoke reservation service
-    request('http://reservations', function (error, response, body) {
+    console.log('Making reservation...');
+    request({
+        uri: 'http://reservations/reservebike',
+        headers: contextful.from(req)
+    }, function (error, response, body) {
+        console.log("successfully received reservation confirmation");
         res.send(body);
     });
 });
@@ -35,7 +42,10 @@ app.get('/api/availablebikes', function (req, res) {
     var bikeServiceUrl = req.url.replace("/api/availablebikes", 'http://bikes/api/getAvailableBikes');
 
     // Get available bikes
-    request(bikeServiceUrl, function (error, response, body) {
+    request({
+        uri: bikeServiceUrl, 
+        headers: contextful.from(req)
+    }, function (error, response, body) {
         if (error || response.statusCode != 200) {
             console.log("ERROR: %j %j", error, response);
             res.send("Ooops, something bad happened. Please try again.");
